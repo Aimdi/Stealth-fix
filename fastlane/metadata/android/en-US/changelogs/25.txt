@@ -1,0 +1,1 @@
+More resilient Reddit connection: rotating user agents and retry with backoff when requesting the anonymous access token.

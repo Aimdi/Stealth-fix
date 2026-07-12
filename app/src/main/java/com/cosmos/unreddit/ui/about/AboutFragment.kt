@@ -62,8 +62,6 @@ class AboutFragment : BaseFragment() {
                     addAll(CREDITS.sortedBy { it.title })
                     add(CreditItem.Section(R.string.about_section_libraries))
                     addAll(LIBRARIES.sortedBy { it.title })
-                    add(CreditItem.Section(R.string.about_section_contributors))
-                    addAll(CONTRIBUTORS.sortedBy { it.name })
                 }
             }
             creditAdapter.submitList(items)
@@ -309,33 +307,5 @@ class AboutFragment : BaseFragment() {
             )
         }
 
-        private val CONTRIBUTORS: List<CreditItem.Contributor> by lazy {
-            listOf(
-                CreditItem.Contributor(
-                    "uDEV2019",
-                    "@uDEV2019",
-                    R.string.contributor_uDEV2019_description,
-                    "https://gitlab.com/uDEV2019"
-                ),
-                CreditItem.Contributor(
-                    "Another Sapiens",
-                    "@another-sapiens",
-                    R.string.contributor_anothersapiens_description,
-                    "https://gitlab.com/another-sapiens"
-                ),
-                CreditItem.Contributor(
-                    "matt wiggins",
-                    "@mwiggins",
-                    R.string.contributor_mwiggins_description,
-                    "https://gitlab.com/mwiggins"
-                ),
-                CreditItem.Contributor(
-                    "Lena Saenger",
-                    "@LenaSaenger04",
-                    R.string.contributor_mwiggins_description,
-                    "https://gitlab.com/LenaSaenger04"
-                )
-            )
-        }
     }
 }
