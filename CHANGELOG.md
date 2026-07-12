@@ -1,3 +1,9 @@
+# 2.3.4 - 2026/07/12
+
+### Changed
+- Images now display at their real aspect ratio instead of being cropped to a fixed box, both in the feed and on the post screen
+- The post screen's top bar now shows the subreddit (e.g. r/pics) so it's clear where you are
+
 # 2.3.3 - 2026/07/12
 
 ### Changed

@@ -244,7 +244,8 @@ class PostDetailsFragment : BaseFragment(),
     }
 
     private fun bindPost(post: PostEntity, fromCache: Boolean) {
-        binding.appBar.label.text = post.title
+        // Show the subreddit in the app bar so it's clear which community the post belongs to
+        binding.appBar.label.text = post.subreddit
         postAdapter.setPost(post, fromCache)
         commentAdapter.postEntity = post
         viewModel.insertPostInHistory(post.id)
