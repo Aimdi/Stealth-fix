@@ -1,0 +1,1 @@
+New setting to show full, uncropped images in the feed. Removed the 'might stop working soon' warning.

@@ -1,3 +1,11 @@
+# 2.3.5 - 2026/07/12
+
+### Added
+- "Full images in feed" setting: show feed images at their full size instead of the cropped thumbnail (off by default, toggle in Settings > Content)
+
+### Removed
+- The "might stop working soon" warning banner
+
 # 2.3.4 - 2026/07/12
 
 ### Changed

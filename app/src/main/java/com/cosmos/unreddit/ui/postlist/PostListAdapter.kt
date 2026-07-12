@@ -70,7 +70,8 @@ class PostListAdapter(
     var contentPreferences: ContentPreferences = ContentPreferences(
         showNsfw = false,
         showNsfwPreview = false,
-        showSpoilerPreview = false
+        showSpoilerPreview = false,
+        fullImages = false
     )
         set(value) {
             if (field.showNsfwPreview != value.showNsfwPreview ||
