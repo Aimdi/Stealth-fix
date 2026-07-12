@@ -17,12 +17,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # The Android SDK command-line tools now require JDK 17+ to run, but the
-    # project's Android Gradle Plugin (7.3.1) builds on JDK 11. Skip sdkmanager's
-    # JDK version check so licenses can be accepted while building on JDK 11.
-    env:
-      SKIP_JDK_VERSION_CHECK: "true"
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,6 +29,10 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # Newer command-line tools require JDK 17+ to run; pin to the last
+          # version that runs on JDK 11, which the AGP 7.3.1 build needs.
+          cmdline-tools-version: '9.0'
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
