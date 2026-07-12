@@ -63,4 +63,10 @@ jobs:
         with:
           tag_name: ${{ github.event.inputs.release_tag || github.ref_name }}
           files: app/build/outputs/apk/debug/*.apk
-          generate_release_notes: true
+          body: |
+            Fixes Reddit feeds not loading ("Something went wrong") by
+            authenticating against the official Reddit API with an anonymous
+            token, since Reddit no longer serves its public .json endpoints to
+            third-party clients.
+
+            This is a debug-signed build intended for sideloading and testing.
