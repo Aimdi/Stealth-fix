@@ -2,12 +2,14 @@ package com.cosmos.unreddit.di
 
 import com.cosmos.unreddit.data.remote.RawJsonInterceptor
 import com.cosmos.unreddit.data.remote.TargetRedditInterceptor
+import com.cosmos.unreddit.data.remote.UserAgentInterceptor
 import com.cosmos.unreddit.data.remote.api.gfycat.GfycatApi
 import com.cosmos.unreddit.data.remote.api.imgur.ImgurApi
 import com.cosmos.unreddit.data.remote.api.imgur.adapter.AlbumDataAdapter
-import com.cosmos.unreddit.data.remote.api.reddit.JsonInterceptor
+import com.cosmos.unreddit.data.remote.api.reddit.OAuthInterceptor
 import com.cosmos.unreddit.data.remote.api.reddit.RedditApi
 import com.cosmos.unreddit.data.remote.api.reddit.RedditCookieJar
+import com.cosmos.unreddit.data.remote.api.reddit.auth.RedditOAuthTokenProvider
 import com.cosmos.unreddit.data.remote.api.reddit.SortingConverterFactory
 import com.cosmos.unreddit.data.remote.api.reddit.TedditApi
 import com.cosmos.unreddit.data.remote.api.reddit.adapter.EditedAdapter
@@ -121,10 +123,10 @@ object NetworkModule {
     @RedditOkHttp
     @Provides
     @Singleton
-    fun provideRedditOkHttpClient(): OkHttpClient {
+    fun provideRedditOkHttpClient(tokenProvider: RedditOAuthTokenProvider): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(RawJsonInterceptor())
-            .addInterceptor(JsonInterceptor())
+            .addInterceptor(OAuthInterceptor(tokenProvider))
             .connectTimeout(TIMEOUT.first, TIMEOUT.second)
             .readTimeout(TIMEOUT.first, TIMEOUT.second)
             .writeTimeout(TIMEOUT.first, TIMEOUT.second)
@@ -160,6 +162,7 @@ object NetworkModule {
     @Singleton
     fun provideRedditScrapOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(UserAgentInterceptor(UserAgentInterceptor.DESKTOP_USER_AGENT))
             .connectTimeout(TIMEOUT.first, TIMEOUT.second)
             .readTimeout(TIMEOUT.first, TIMEOUT.second)
             .writeTimeout(TIMEOUT.first, TIMEOUT.second)
