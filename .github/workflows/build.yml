@@ -9,6 +9,11 @@ on:
       - 'v*'
   pull_request:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Tag to publish a release for (e.g. v2.3.2). Leave empty to only build.'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -53,8 +58,9 @@ jobs:
           if-no-files-found: error
 
       - name: Publish release
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.release_tag != ''
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.event.inputs.release_tag || github.ref_name }}
           files: app/build/outputs/apk/debug/*.apk
           generate_release_notes: true
