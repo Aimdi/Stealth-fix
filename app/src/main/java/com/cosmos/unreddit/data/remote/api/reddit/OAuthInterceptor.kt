@@ -47,7 +47,7 @@ class OAuthInterceptor(
         return newBuilder()
             .url(oauthUrl)
             .header("Authorization", "Bearer $token")
-            .header("User-Agent", RedditOAuthTokenProvider.USER_AGENT)
+            .header("User-Agent", tokenProvider.userAgent)
             .apply {
                 tokenProvider.loid?.let { header(RedditOAuthTokenProvider.HEADER_LOID, it) }
                 tokenProvider.session?.let { header(RedditOAuthTokenProvider.HEADER_SESSION, it) }

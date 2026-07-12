@@ -1,3 +1,8 @@
+# 2.3.3 - 2026/07/12
+
+### Changed
+- More resilient Reddit connection: the anonymous token is now requested with a rotating pool of Reddit for Android user agents and retried with backoff (including on rate limits), reducing "Something went wrong" errors
+
 # 2.3.2 - 2026/07/12
 
 ### Fixed
