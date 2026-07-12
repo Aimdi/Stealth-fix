@@ -1,9 +1,12 @@
 package com.cosmos.unreddit.ui.postlist
 
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.cosmos.unreddit.R
 import com.cosmos.unreddit.data.model.MediaType
@@ -154,6 +157,8 @@ abstract class PostViewHolder(
         ) {
             super.bind(postEntity, contentPreferences)
 
+            binding.imagePostPreview.applyImageDisplayMode(contentPreferences.fullImages)
+
             binding.imagePostPreview.load(
                 postEntity.preview,
                 !postEntity.shouldShowPreview(contentPreferences)
@@ -199,6 +204,8 @@ abstract class PostViewHolder(
             contentPreferences: ContentPreferences
         ) {
             super.bind(postEntity, contentPreferences)
+
+            binding.imagePostPreview.applyImageDisplayMode(contentPreferences.fullImages)
 
             binding.imagePostPreview.load(
                 postEntity.preview,
@@ -299,5 +306,29 @@ abstract class PostViewHolder(
 
     class PollPostViewHolder() {
 
+    }
+}
+
+/**
+ * Switches a feed preview image between the cropped, fixed-height layout (default) and a full,
+ * uncropped view that keeps the image's aspect ratio (capped at [R.dimen.post_image_max_height]).
+ * Both branches are set explicitly because view holders are recycled.
+ */
+private fun ImageView.applyImageDisplayMode(fullImages: Boolean) {
+    if (fullImages) {
+        scaleType = ImageView.ScaleType.FIT_CENTER
+        adjustViewBounds = true
+        maxHeight = resources.getDimensionPixelSize(R.dimen.post_image_max_height)
+    } else {
+        scaleType = ImageView.ScaleType.CENTER_CROP
+        adjustViewBounds = false
+        maxHeight = Integer.MAX_VALUE
+    }
+    updateLayoutParams {
+        height = if (fullImages) {
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        } else {
+            resources.getDimensionPixelSize(R.dimen.post_image_height)
+        }
     }
 }

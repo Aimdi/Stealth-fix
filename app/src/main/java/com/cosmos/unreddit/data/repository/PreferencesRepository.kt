@@ -94,6 +94,20 @@ class PreferencesRepository @Inject constructor(
         )
     }
 
+    suspend fun setFullImages(fullImages: Boolean) {
+        preferencesDatastore.setValue(
+            ContentPreferences.PreferencesKeys.FULL_IMAGES,
+            fullImages
+        )
+    }
+
+    fun getFullImages(defaultValue: Boolean = false): Flow<Boolean> {
+        return preferencesDatastore.getValue(
+            ContentPreferences.PreferencesKeys.FULL_IMAGES,
+            defaultValue
+        )
+    }
+
     suspend fun setRedditSource(redditSource: Int) {
         preferencesDatastore.setValue(
             DataPreferences.PreferencesKeys.REDDIT_SOURCE,
@@ -157,7 +171,9 @@ class PreferencesRepository @Inject constructor(
                 preferences[ContentPreferences.PreferencesKeys.SHOW_NSFW_PREVIEW] ?: false
             val showSpoilerPreview =
                 preferences[ContentPreferences.PreferencesKeys.SHOW_SPOILER_PREVIEW] ?: false
-            ContentPreferences(showNsfw, showNsfwPreview, showSpoilerPreview)
+            val fullImages =
+                preferences[ContentPreferences.PreferencesKeys.FULL_IMAGES] ?: false
+            ContentPreferences(showNsfw, showNsfwPreview, showSpoilerPreview, fullImages)
         }
     }
 

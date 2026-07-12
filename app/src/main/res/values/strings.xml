@@ -149,6 +149,8 @@
     <string name="preference_show_nsfw">Show NSFW content</string>
     <string name="preference_show_nsfw_preview">Show NSFW preview</string>
     <string name="preference_show_spoiler_preview">Show Spoiler preview</string>
+    <string name="preference_full_images">Full images in feed</string>
+    <string name="preference_full_images_summary">Show images at their full size instead of cropping them</string>
 
     <string name="preference_reddit_source">Reddit Source</string>
     <string name="preference_reddit_source_reddit">Reddit</string>
