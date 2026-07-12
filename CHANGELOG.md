@@ -1,3 +1,9 @@
+# 2.3.2 - 2026/07/12
+
+### Fixed
+- Reddit feeds not loading ("Something went wrong"): the app now authenticates against the official Reddit API with an anonymous token, since Reddit no longer serves its public .json endpoints to third-party clients
+- Reddit scraping source being blocked because of the default HTTP client user agent
+
 # 2.3.1 - 2025/06/01
 
 ### Fixed

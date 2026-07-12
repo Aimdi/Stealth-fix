@@ -1,0 +1,1 @@
+Fix Reddit feeds not loading ("Something went wrong") by authenticating against the official Reddit API with an anonymous token
