@@ -41,9 +41,6 @@ class HideBottomViewBehavior<V: View> @JvmOverloads constructor(
 
     var enabled: Boolean = true
 
-    // Keep constructor parity with previous call sites that only pass leftHandedMode
-    constructor(leftHandedMode: Boolean) : this(leftHandedMode, null, null)
-
     override fun onLayoutChild(parent: CoordinatorLayout, child: V, layoutDirection: Int): Boolean {
         val paramsCompat = child.layoutParams as ViewGroup.MarginLayoutParams
         height = child.measuredHeight + paramsCompat.bottomMargin
