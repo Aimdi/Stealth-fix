@@ -51,11 +51,16 @@ jobs:
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK artifact
+        # Best-effort convenience upload; a hit Actions artifact-storage
+        # quota must not block publishing the release (release assets are
+        # stored separately and don't count against that quota).
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: stealth-debug-apk
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+          retention-days: 7
 
       - name: Publish release
         if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.release_tag != ''
@@ -64,9 +69,17 @@ jobs:
           tag_name: ${{ github.event.inputs.release_tag || github.ref_name }}
           files: app/build/outputs/apk/debug/*.apk
           body: |
-            Fixes Reddit feeds not loading ("Something went wrong") by
-            authenticating against the official Reddit API with an anonymous
-            token, since Reddit no longer serves its public .json endpoints to
-            third-party clients.
+            ## What's new in 2.3.6
+
+            Mobile UI redesigned to feel closer to Reddit web on mobile:
+            - Reddit orange brand colors (light + dark themes)
+            - Full-width post cards on a gray canvas with gaps between posts
+            - Compact single-line post header (`r/subreddit · u/author · time`)
+            - Title above media; full-bleed images
+            - Denser typography and action bar (votes / comments / save)
+            - Full-width labeled bottom navigation that slides down on scroll
+
+            Also includes the Reddit anonymous-token auth fix so feeds keep
+            loading after Reddit shut down unauthenticated `.json` endpoints.
 
             This is a debug-signed build intended for sideloading and testing.

@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toStartOf="@id/comment_op_text"
             android:textAppearance="@style/TextAppearanceCommentAuthor"
             android:text="@{comment.author}"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/text_color"
             tools:text="author"/>
 
         <TextView

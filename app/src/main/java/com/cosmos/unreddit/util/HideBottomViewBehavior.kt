@@ -13,6 +13,13 @@ import androidx.core.view.ViewCompat
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 
+/**
+ * Hides a bottom view (e.g. bottom navigation) by sliding it vertically off-screen on scroll,
+ * matching the feel of Reddit mobile web's full-width bottom bar.
+ *
+ * [leftHandedMode] is retained for API compatibility but no longer affects direction —
+ * the bar is always full-width and slides on the Y axis.
+ */
 class HideBottomViewBehavior<V: View> @JvmOverloads constructor(
     private val leftHandedMode: Boolean = false,
     context: Context? = null,
@@ -22,7 +29,7 @@ class HideBottomViewBehavior<V: View> @JvmOverloads constructor(
     private val LINEAR_OUT_SLOW_IN_INTERPOLATOR = FastOutLinearInInterpolator()
     private val FAST_OUT_LINEAR_IN_INTERPOLATOR = LinearOutSlowInInterpolator()
 
-    private var width: Int = 0
+    private var height: Int = 0
     private var currentState: Int = STATE_SCROLLED_UP
     private var currentAnimator: ViewPropertyAnimator? = null
 
@@ -36,7 +43,7 @@ class HideBottomViewBehavior<V: View> @JvmOverloads constructor(
 
     override fun onLayoutChild(parent: CoordinatorLayout, child: V, layoutDirection: Int): Boolean {
         val paramsCompat = child.layoutParams as ViewGroup.MarginLayoutParams
-        width = child.measuredWidth + paramsCompat.rightMargin
+        height = child.measuredHeight + paramsCompat.bottomMargin
         return super.onLayoutChild(parent, child, layoutDirection)
     }
 
@@ -82,16 +89,16 @@ class HideBottomViewBehavior<V: View> @JvmOverloads constructor(
         }
 
         currentState = STATE_SCROLLED_UP
-        val targetTranslationX = 0
+        val targetTranslationY = 0
         if (animate) {
             animateChildTo(
                 child,
-                targetTranslationX,
+                targetTranslationY,
                 ENTER_ANIMATION_DURATION,
                 LINEAR_OUT_SLOW_IN_INTERPOLATOR
             )
         } else {
-            child.translationX = targetTranslationX.toFloat()
+            child.translationY = targetTranslationY.toFloat()
         }
     }
 
@@ -108,28 +115,28 @@ class HideBottomViewBehavior<V: View> @JvmOverloads constructor(
         }
 
         currentState = STATE_SCROLLED_DOWN
-        val targetTranslationX = if (leftHandedMode) -width else width
+        val targetTranslationY = height
         if (animate) {
             animateChildTo(
                 child,
-                targetTranslationX,
+                targetTranslationY,
                 EXIT_ANIMATION_DURATION,
                 FAST_OUT_LINEAR_IN_INTERPOLATOR
             )
         } else {
-            child.translationX = targetTranslationX.toFloat()
+            child.translationY = targetTranslationY.toFloat()
         }
     }
 
     private fun animateChildTo(
         child: V,
-        targetX: Int,
+        targetY: Int,
         duration: Long,
         interpolator: TimeInterpolator
     ) {
         currentAnimator = child
             .animate()
-            .translationX(targetX.toFloat())
+            .translationY(targetY.toFloat())
             .setInterpolator(interpolator)
             .setDuration(duration)
             .setListener(object : AnimatorListenerAdapter() {

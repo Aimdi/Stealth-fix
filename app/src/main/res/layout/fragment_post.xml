@@ -15,25 +15,28 @@
         android:layout_height="match_parent"
         app:cardElevation="0dp"
         app:cardCornerRadius="0dp"
-        app:cardBackgroundColor="?attr/colorSurface">
+        app:cardBackgroundColor="@color/background">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/background">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/app_bar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorSurface"
-                app:elevation="0dp">
+                android:background="@color/surface"
+                app:elevation="0dp"
+                app:liftOnScroll="true"
+                app:liftOnScrollTargetViewId="@id/list_post">
 
                 <include
                     android:id="@+id/app_bar"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
-                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:layout_scrollFlags="scroll|enterAlways|snap"
                     layout="@layout/layout_appbar" />
 
             </com.google.android.material.appbar.AppBarLayout>
@@ -42,13 +45,16 @@
                 android:id="@+id/pull_refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/background"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <com.cosmos.unreddit.ui.common.widget.PostRecyclerView
                     android:id="@+id/list_post"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/background"
                     android:clipToPadding="false"
+                    android:paddingBottom="@dimen/bottom_navigation_height"
                     android:overScrollMode="never" />
             </com.cosmos.unreddit.ui.common.widget.PullToRefreshLayout>
 

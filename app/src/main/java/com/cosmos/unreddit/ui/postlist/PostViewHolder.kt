@@ -63,8 +63,9 @@ abstract class PostViewHolder(
 
         postInfoBinding.run {
             this.post = postEntity
-            textPostAuthor.text = postEntity.author
-            textSubreddit.text = postEntity.subreddit
+            // Reddit mobile web: r/sub · u/author · time
+            textPostAuthor.text = formatUsername(postEntity.author)
+            textSubreddit.text = formatSubreddit(postEntity.subreddit)
         }
 
         title.apply {
@@ -306,6 +307,23 @@ abstract class PostViewHolder(
 
     class PollPostViewHolder() {
 
+    }
+}
+
+private fun formatSubreddit(subreddit: String): String {
+    return when {
+        subreddit.startsWith("r/", ignoreCase = true) ||
+            subreddit.startsWith("/r/", ignoreCase = true) -> subreddit.removePrefix("/")
+        else -> "r/$subreddit"
+    }
+}
+
+private fun formatUsername(author: String): String {
+    return when {
+        author.startsWith("u/", ignoreCase = true) ||
+            author.startsWith("/u/", ignoreCase = true) -> author.removePrefix("/")
+        author.startsWith("[") -> author // e.g. [deleted]
+        else -> "u/$author"
     }
 }
 

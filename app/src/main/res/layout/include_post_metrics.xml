@@ -10,9 +10,14 @@
             type="com.cosmos.unreddit.data.model.db.PostEntity" />
     </data>
 
+    <!-- Compact action row like Reddit mobile web -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/post_metrics_height"
+        android:paddingHorizontal="@dimen/post_padding_horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="@dimen/post_card_padding_vertical">
 
         <ImageView
             android:id="@+id/image_vote_icon"
@@ -20,10 +25,9 @@
             android:layout_height="@dimen/post_icon_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="@dimen/post_padding_horizontal"
-            android:layout_marginTop="@dimen/post_margin_top_small"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:contentDescription="Upvote icon"
-            app:srcCompat = "@drawable/ic_votes"/>
+            app:srcCompat="@drawable/ic_votes"/>
 
         <TextView
             android:id="@+id/text_post_vote"
@@ -33,8 +37,9 @@
             app:layout_constraintBottom_toBottomOf="@id/image_vote_icon"
             app:layout_constraintStart_toEndOf="@id/image_vote_icon"
             android:layout_marginStart="@dimen/post_icon_text_margin"
+            android:textAppearance="@style/TextAppearancePostMetrics"
             android:text="@{post.score}"
-            tools:text="12345"/>
+            tools:text="12.3k"/>
 
         <TextView
             android:id="@+id/text_post_ratio"
@@ -43,9 +48,10 @@
             app:layout_constraintTop_toTopOf="@id/image_vote_icon"
             app:layout_constraintBottom_toBottomOf="@id/image_vote_icon"
             app:layout_constraintStart_toEndOf="@id/text_post_vote"
-            android:layout_marginStart="@dimen/post_margin_horizontal"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearancePostMetrics"
             android:textColor="@color/text_color_secondary"
-            tools:text="50%"/>
+            tools:text="98%"/>
 
         <ImageView
             android:id="@+id/image_comments_icon"
@@ -54,7 +60,7 @@
             app:layout_constraintTop_toTopOf="@id/image_vote_icon"
             app:layout_constraintBottom_toBottomOf="@id/image_vote_icon"
             app:layout_constraintStart_toEndOf="@id/text_post_ratio"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="20dp"
             android:contentDescription="Comments icon"
             app:srcCompat="@drawable/ic_comments"/>
 
@@ -66,8 +72,9 @@
             app:layout_constraintBottom_toBottomOf="@id/image_vote_icon"
             app:layout_constraintStart_toEndOf="@id/image_comments_icon"
             android:layout_marginStart="@dimen/post_icon_text_margin"
+            android:textAppearance="@style/TextAppearancePostMetrics"
             android:text="@{post.commentsNumber}"
-            tools:text="1234"/>
+            tools:text="432"/>
 
         <ImageButton
             android:id="@+id/button_more"
@@ -76,8 +83,8 @@
             app:layout_constraintTop_toTopOf="@id/image_vote_icon"
             app:layout_constraintBottom_toBottomOf="@id/image_vote_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/post_padding_horizontal"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@null"
             app:srcCompat="@drawable/ic_more"/>
 
         <com.cosmos.unreddit.ui.common.widget.CheckableImageView
@@ -87,8 +94,9 @@
             app:layout_constraintTop_toTopOf="@id/image_vote_icon"
             app:layout_constraintBottom_toBottomOf="@id/image_vote_icon"
             app:layout_constraintEnd_toStartOf="@id/button_more"
-            android:layout_marginEnd="@dimen/post_padding_horizontal"
-            app:srcCompat="@drawable/save" />
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@null"
+            app:srcCompat="@drawable/save"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

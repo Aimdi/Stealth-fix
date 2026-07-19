@@ -15,9 +15,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.cosmos.unreddit.MainActivity.BottomNavigationState.LEFT_HANDED
-import com.cosmos.unreddit.MainActivity.BottomNavigationState.NOT_INITIALIZED
-import com.cosmos.unreddit.MainActivity.BottomNavigationState.RIGHT_HANDED
 import com.cosmos.unreddit.databinding.ActivityMainBinding
 import com.cosmos.unreddit.ui.postlist.PostListFragment
 import com.cosmos.unreddit.util.HideBottomViewBehavior
@@ -26,8 +23,6 @@ import com.cosmos.unreddit.util.extension.currentNavigationFragment
 import com.cosmos.unreddit.util.extension.launchRepeat
 import com.cosmos.unreddit.util.extension.unredditApplication
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
@@ -41,8 +36,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private lateinit var navController: NavController
 
-    private var bottomNavigationState: BottomNavigationState = NOT_INITIALIZED
-
+    private var bottomNavigationInitialized: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(unredditApplication.appTheme)
@@ -54,6 +48,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         setContentView(binding.root)
 
         initNavigation()
+        initBottomNavigationView()
 
         launchRepeat(Lifecycle.State.STARTED) {
             launch {
@@ -61,16 +56,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                     // Drop the first item to let initBottomNavigationView manage the visibility
                     .drop(1)
                     .collect(this@MainActivity::showNavigation)
-            }
-
-            launch {
-                viewModel.leftHandedMode.collect { leftHandedMode ->
-                    when (bottomNavigationState) {
-                        NOT_INITIALIZED -> initBottomNavigationView(leftHandedMode)
-                        RIGHT_HANDED -> if (leftHandedMode) initBottomNavigationView(true)
-                        LEFT_HANDED -> if (!leftHandedMode) initBottomNavigationView(false)
-                    }
-                }
             }
         }
     }
@@ -95,16 +80,19 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         }
     }
 
-    private fun initBottomNavigationView(leftHandedMode: Boolean) {
+    /**
+     * Full-width bottom bar (Reddit mobile web style). System bar inset is applied as
+     * padding so icons sit above the gesture/nav area without floating side margins.
+     */
+    private fun initBottomNavigationView() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavigation) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
             view.run {
+                setPadding(paddingLeft, paddingTop, paddingRight, insets.bottom)
                 updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    bottomMargin = insets.bottom +
-                            resources.getDimension(R.dimen.bottom_navigation_margin).toInt()
+                    bottomMargin = 0
                 }
-
                 clearWindowInsetsListener()
             }
 
@@ -112,48 +100,17 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         }
 
         binding.bottomNavigation.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-            gravity = if (leftHandedMode) {
-                Gravity.BOTTOM or Gravity.START
-            } else {
-                Gravity.BOTTOM or Gravity.END
-            }
-            behavior = HideBottomViewBehavior<BottomNavigationView>(leftHandedMode)
+            width = ViewGroup.LayoutParams.MATCH_PARENT
+            gravity = Gravity.BOTTOM
+            behavior = HideBottomViewBehavior<BottomNavigationView>(false)
         }
 
-        val radius = resources.getDimension(R.dimen.bottom_navigation_radius)
-        val bottomNavigationBackground = binding.bottomNavigation.background
-                as? MaterialShapeDrawable
-
-        bottomNavigationBackground?.run {
-            val builder = shapeAppearanceModel.toBuilder()
-
-            if (leftHandedMode) {
-                builder.apply {
-                    setTopRightCorner(CornerFamily.ROUNDED, radius)
-                    setBottomRightCorner(CornerFamily.ROUNDED, radius)
-
-                    setTopLeftCorner(CornerFamily.CUT, 0F)
-                    setBottomLeftCorner(CornerFamily.CUT, 0F)
-                }
-            } else {
-                builder.apply {
-                    setTopRightCorner(CornerFamily.CUT, 0F)
-                    setBottomRightCorner(CornerFamily.CUT, 0F)
-
-                    setTopLeftCorner(CornerFamily.ROUNDED, radius)
-                    setBottomLeftCorner(CornerFamily.ROUNDED, radius)
-                }
-            }
-
-            shapeAppearanceModel = builder.build()
-        }
-
-        // Wait for the view to be ready to show/hide it (otherwise width could be 0)
+        // Wait for the view to be ready to show/hide it
         binding.bottomNavigation.post {
             showNavigation(viewModel.navigationVisibility.value, false)
         }
 
-        bottomNavigationState = if (leftHandedMode) LEFT_HANDED else RIGHT_HANDED
+        bottomNavigationInitialized = true
     }
 
     private fun showNavigation(show: Boolean, animate: Boolean = true) {
@@ -192,11 +149,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     override fun onDestroy() {
         super.onDestroy()
-        bottomNavigationState = NOT_INITIALIZED
+        bottomNavigationInitialized = false
     }
-
-    private enum class BottomNavigationState {
-        NOT_INITIALIZED, RIGHT_HANDED, LEFT_HANDED
-    }
-
 }

@@ -1,68 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#673AB7</color>
-    <color name="colorPrimaryLight">#9A67EA</color>
-    <color name="colorPrimaryDark">#320B86</color>
-    <color name="colorAccent">@color/colorSecondaryLight</color>
+    <!-- Reddit-inspired brand colors -->
+    <color name="colorPrimary">#FF4500</color>
+    <color name="colorPrimaryLight">#FF6A33</color>
+    <color name="colorPrimaryDark">#D93900</color>
+    <color name="colorAccent">@color/colorSecondary</color>
 
-    <color name="colorSecondary">#E91E63</color>
-    <color name="colorSecondaryLight">#FF6090</color>
-    <color name="colorSecondaryDark">#B0003A</color>
+    <color name="colorSecondary">#0079D3</color>
+    <color name="colorSecondaryLight">#33A8FF</color>
+    <color name="colorSecondaryDark">#0060A8</color>
 
     <color name="red_500">#F44336</color>
 
     <color name="ratio_gradient_low">#F44336</color>
-    <color name="ratio_gradient_high">#4CAF50</color>
+    <color name="ratio_gradient_high">#46D160</color>
 
-    <color name="text_color">#212121</color>
-    <color name="text_color_dark">#212121</color>
-    <color name="text_color_secondary">#9C9DB9</color>
+    <color name="text_color">#1A1A1B</color>
+    <color name="text_color_dark">#1A1A1B</color>
+    <color name="text_color_secondary">#7C7C7C</color>
     <!-- TODO: Merge with seen color -->
-    <color name="text_color_disabled">#7F7F7F</color>
-    <color name="text_color_post_info">#9E9E9E</color>
+    <color name="text_color_disabled">#878A8C</color>
+    <color name="text_color_post_info">#7C7C7C</color>
     <!-- TODO: Find better seen color? -->
-    <color name="text_color_post_seen">#7F7F7F</color>
+    <color name="text_color_post_seen">#878A8C</color>
 
-    <color name="background">#FAFAFF</color>
+    <!-- Canvas behind cards (Reddit mobile web) -->
+    <color name="background">#DAE0E6</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="divider">#EDEFF1</color>
+    <color name="post_separator">#DAE0E6</color>
 
-    <color name="icon_tint">#212121</color>
+    <color name="icon_tint">#1A1A1B</color>
 
-    <color name="chip_background_color">#EBEBFF</color>
+    <color name="chip_background_color">#EDEFF1</color>
     <color name="chip_selected_text_color">@color/colorPrimary</color>
 
-    <color name="icon_navigation_color_unpressed">#D1C4E9</color>
+    <color name="icon_navigation_color_unpressed">#878A8C</color>
 
-    <color name="card_background_color">#F3EFFF</color>
+    <color name="card_background_color">#FFFFFF</color>
 
-    <color name="switch_thumb_disabled_color">#D1C4E9</color>
-    <color name="switch_track_disabled_color">#EDE7F6</color>
-    <color name="switch_track_checked_color">#E1BEE7</color>
-    <color name="switch_track_unchecked_color">#D1C4E9</color>
+    <color name="switch_thumb_disabled_color">#EDEFF1</color>
+    <color name="switch_track_disabled_color">#F6F7F8</color>
+    <color name="switch_track_checked_color">#FFD6C8</color>
+    <color name="switch_track_unchecked_color">#EDEFF1</color>
 
-    <color name="regular_gradient_start">#673AB7</color>
-    <color name="regular_gradient_end">#B085F5</color>
+    <color name="regular_gradient_start">#FF4500</color>
+    <color name="regular_gradient_end">#FF8717</color>
 
     <color name="admin_gradient_start">#D32F2F</color>
     <color name="admin_gradient_end">#EF6C00</color>
-    <color name="admin_color">#F44336</color>
+    <color name="admin_color">#EA0027</color>
 
     <color name="moderator_gradient_start">#2E7D32</color>
     <color name="moderator_gradient_end">#76D275</color>
-    <color name="moderator_color">#4CAF50</color>
+    <color name="moderator_color">#46D160</color>
 
-    <color name="nsfw_gradient_start">#F06292</color>
-    <color name="nsfw_gradient_end">#F8BBD0</color>
+    <color name="nsfw_gradient_start">#FF585B</color>
+    <color name="nsfw_gradient_end">#FFB3B5</color>
 
-    <color name="oc_gradient_start">#2196F3</color>
-    <color name="oc_gradient_end">#90CAF9</color>
+    <color name="oc_gradient_start">#0079D3</color>
+    <color name="oc_gradient_end">#72C3FF</color>
 
-    <color name="flair_gradient_start">#7E57C2</color>
-    <color name="flair_gradient_end">#B39DDB</color>
+    <color name="flair_gradient_start">#0079D3</color>
+    <color name="flair_gradient_end">#5EB3F0</color>
 
-    <color name="spoiler_gradient_start">#90A4AE</color>
-    <color name="spoiler_gradient_end">#CFD8DC</color>
+    <color name="spoiler_gradient_start">#878A8C</color>
+    <color name="spoiler_gradient_end">#C5C7C9</color>
 
-    <color name="text_color_op">#03A9F4</color>
+    <color name="text_color_op">#0079D3</color>
 
     <color name="comment_indicator_1">#EF5350</color>
     <color name="comment_indicator_2">#BA68C8</color>
@@ -73,11 +78,11 @@
     <color name="comment_indicator_7">#FFB74D</color>
     <color name="comment_indicator_8">#E0E0E0</color>
 
-    <color name="exoplayer_buffered_color">#809A67EA</color>
-    <color name="exoplayer_unplayed_color">#1A9A67EA</color>
+    <color name="exoplayer_buffered_color">#80FF6A33</color>
+    <color name="exoplayer_unplayed_color">#1AFF6A33</color>
 
     <color name="profile_dialog_background">#80000000</color>
-    <color name="profile_new_background">#808080</color>
+    <color name="profile_new_background">#878A8C</color>
 
     <color name="profile_background_1">#F44336</color>
     <color name="profile_background_2">#E91E63</color>
