@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="post_margin_horizontal">8dp</dimen>
-    <dimen name="post_margin_vertical">16dp</dimen>
+    <!-- Full-width cards with Reddit-style canvas gaps between posts -->
+    <dimen name="post_margin_horizontal">0dp</dimen>
+    <dimen name="post_margin_vertical">0dp</dimen>
+    <dimen name="post_card_padding_vertical">10dp</dimen>
 
-    <dimen name="post_padding_horizontal">16dp</dimen>
+    <dimen name="post_padding_horizontal">12dp</dimen>
 
-    <dimen name="post_content_margin_horizontal">25dp</dimen>
+    <dimen name="post_content_margin_horizontal">0dp</dimen>
 
-    <dimen name="post_elevation">8dp</dimen>
+    <dimen name="post_elevation">0dp</dimen>
 
-    <dimen name="post_title_margin">16dp</dimen>
+    <dimen name="post_title_margin">12dp</dimen>
 
-    <dimen name="post_text_padding">16dp</dimen>
-    <dimen name="post_text_max_height">200dp</dimen>
-    <dimen name="post_text_card_radius">15dp</dimen>
+    <dimen name="post_text_padding">12dp</dimen>
+    <dimen name="post_text_max_height">180dp</dimen>
+    <dimen name="post_text_card_radius">4dp</dimen>
 
-    <dimen name="post_image_height">250dp</dimen>
+    <dimen name="post_image_height">280dp</dimen>
     <dimen name="post_image_max_height">550dp</dimen>
+    <dimen name="post_image_corner_radius">0dp</dimen>
 
-    <dimen name="post_link_image_size">100dp</dimen>
-    <dimen name="post_link_image_margin_horizontal">8dp</dimen>
+    <dimen name="post_link_image_size">96dp</dimen>
+    <dimen name="post_link_image_margin_horizontal">12dp</dimen>
+    <dimen name="post_link_image_corner_radius">4dp</dimen>
 
-    <dimen name="post_margin_top_small">8dp</dimen>
-    <dimen name="post_margin_top_large">16dp</dimen>
+    <dimen name="post_margin_top_small">6dp</dimen>
+    <dimen name="post_margin_top_large">8dp</dimen>
 
-    <dimen name="post_icon_size">24dp</dimen>
-    <dimen name="post_icon_text_margin">5dp</dimen>
+    <dimen name="post_icon_size">20dp</dimen>
+    <dimen name="post_icon_text_margin">4dp</dimen>
+    <dimen name="post_metrics_height">36dp</dimen>
 
-    <dimen name="post_awards_height">38dp</dimen>
+    <dimen name="post_awards_height">32dp</dimen>
 
     <dimen name="post_flair_padding">4dp</dimen>
-    <dimen name="post_flair_gap">8dp</dimen>
+    <dimen name="post_flair_gap">6dp</dimen>
 
-    <dimen name="post_divider_inset">64dp</dimen>
+    <dimen name="post_divider_inset">0dp</dimen>
+    <dimen name="post_separator_height">8dp</dimen>
 
-    <dimen name="post_type_indicator_margin">16dp</dimen>
+    <dimen name="post_type_indicator_margin">12dp</dimen>
 
     <dimen name="sort_padding">16dp</dimen>
     <dimen name="sort_margin">16dp</dimen>
 
-    <dimen name="app_bar_margin">16dp</dimen>
-    <dimen name="app_bar_button_size">32dp</dimen>
-    <dimen name="app_bar_button_elevation">8dp</dimen>
+    <dimen name="app_bar_margin">12dp</dimen>
+    <dimen name="app_bar_button_size">36dp</dimen>
+    <dimen name="app_bar_button_elevation">0dp</dimen>
 
     <dimen name="card_height">84dp</dimen>
     <dimen name="card_image_size">42dp</dimen>
@@ -107,8 +113,8 @@
     <dimen name="flair_image_size">16dp</dimen>
 
     <dimen name="comment_offset">8dp</dimen>
-    <dimen name="comment_padding_horizontal">16dp</dimen>
-    <dimen name="comment_padding_vertical">8dp</dimen>
+    <dimen name="comment_padding_horizontal">12dp</dimen>
+    <dimen name="comment_padding_vertical">6dp</dimen>
     <dimen name="comment_icon_size">16dp</dimen>
 
     <dimen name="award_image_size">16dp</dimen>
@@ -142,13 +148,14 @@
     <dimen name="info_bar_margin_top">8dp</dimen>
     <dimen name="info_bar_elevation">8dp</dimen>
 
-    <dimen name="bottom_navigation_elevation">8dp</dimen>
-    <dimen name="bottom_navigation_radius">16dp</dimen>
-    <dimen name="bottom_navigation_size">256dp</dimen>
-    <dimen name="bottom_navigation_margin">24dp</dimen>
+    <dimen name="bottom_navigation_elevation">4dp</dimen>
+    <dimen name="bottom_navigation_radius">0dp</dimen>
+    <dimen name="bottom_navigation_size">0dp</dimen>
+    <dimen name="bottom_navigation_margin">0dp</dimen>
+    <dimen name="bottom_navigation_height">56dp</dimen>
 
-    <dimen name="card_elevation">8dp</dimen>
-    <dimen name="card_radius">15dp</dimen>
+    <dimen name="card_elevation">0dp</dimen>
+    <dimen name="card_radius">4dp</dimen>
 
     <dimen name="profile_manager_carousel_height">175dp</dimen>
     <dimen name="profile_name_margin">8dp</dimen>

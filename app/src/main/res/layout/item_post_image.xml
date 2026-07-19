@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Reddit web mobile order: meta → title → flairs → full-bleed media → actions -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/post_margin_horizontal"
-    android:layout_marginVertical="@dimen/post_margin_vertical">
+    android:background="@color/surface"
+    android:foreground="?attr/selectableItemBackground">
 
     <include
         android:id="@id/include_post_info"
@@ -15,24 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/image_post_preview"
-        layout="@layout/include_post_info"/>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/image_post_preview"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/post_image_height"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/include_post_info"
         app:layout_constraintBottom_toTopOf="@id/text_post_title"
-        android:layout_marginHorizontal="@dimen/post_content_margin_horizontal"
-        android:layout_marginVertical="@dimen/post_margin_top_large"
-        android:scaleType="centerCrop"
-        android:elevation="@dimen/post_elevation"
-        app:shapeAppearanceOverlay="@style/RoundedImageViewStyle"
-        android:contentDescription="Post preview image"
-        tools:src="@tools:sample/backgrounds/scenic"/>
+        layout="@layout/include_post_info"/>
 
     <TextView
         android:id="@+id/text_post_title"
@@ -41,9 +26,10 @@
         android:textAppearance="@style/TextAppearancePostTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_post_preview"
+        app:layout_constraintTop_toBottomOf="@id/include_post_info"
         app:layout_constraintBottom_toTopOf="@id/include_post_flairs"
         android:layout_marginHorizontal="@dimen/post_title_margin"
+        android:layout_marginTop="@dimen/post_margin_top_small"
         tools:text="This is a post" />
 
     <include
@@ -53,19 +39,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_post_title"
-        app:layout_constraintBottom_toTopOf="@id/awards"
+        app:layout_constraintBottom_toTopOf="@id/image_post_preview"
         android:layout_marginTop="@dimen/post_margin_top_small"
         layout="@layout/include_post_flairs"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_post_preview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/post_image_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/include_post_flairs"
+        app:layout_constraintBottom_toTopOf="@id/awards"
+        android:layout_marginTop="@dimen/post_margin_top_large"
+        android:scaleType="centerCrop"
+        android:elevation="0dp"
+        app:shapeAppearanceOverlay="@style/RoundedImageViewStyle"
+        android:contentDescription="Post preview image"
+        tools:src="@tools:sample/backgrounds/scenic"/>
 
     <com.cosmos.unreddit.ui.common.widget.AwardView
         android:id="@+id/awards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/include_post_flairs"
+        app:layout_constraintTop_toBottomOf="@id/image_post_preview"
         app:layout_constraintBottom_toTopOf="@id/include_post_metrics"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/post_margin_top_small"
-        android:layout_marginTop="@dimen/post_margin_top_large"
+        android:layout_marginStart="@dimen/post_padding_horizontal"
+        android:layout_marginTop="@dimen/post_margin_top_small"
         android:paddingVertical="@dimen/award_chip_padding_vertical_post"
         android:paddingHorizontal="@dimen/award_chip_padding_horizontal_post"
         app:textStyle="@style/TextAppearanceAwardPost"/>
@@ -78,7 +79,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/awards"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="@dimen/post_margin_top_small"
         layout="@layout/include_post_metrics"/>
 
     <com.cosmos.unreddit.ui.common.widget.CardButton

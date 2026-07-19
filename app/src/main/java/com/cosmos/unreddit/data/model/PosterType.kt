@@ -6,7 +6,8 @@ import com.cosmos.unreddit.R
 import com.cosmos.unreddit.util.PostUtil
 
 enum class PosterType(val value: Int, @ColorRes val color: Int) {
-    REGULAR(0, R.color.colorPrimary),
+    // Regular authors use secondary text color (Reddit mobile web); mod/admin keep accents
+    REGULAR(0, R.color.text_color_secondary),
     ADMIN(1, R.color.admin_color),
     MODERATOR(2, R.color.moderator_color);
 

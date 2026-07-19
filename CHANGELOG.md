@@ -1,3 +1,14 @@
+# 2.3.6 - 2026/07/19
+
+### Changed
+- Mobile UI redesigned to feel closer to Reddit web on mobile:
+  - Reddit orange brand colors (light + dark themes)
+  - Full-width post cards on a gray canvas with 8dp gaps between posts
+  - Compact single-line post header: `r/subreddit · u/author · time`
+  - Title above media; full-bleed images without heavy rounded corners
+  - Denser typography and action bar (votes / comments / save)
+  - Full-width labeled bottom navigation that slides down on scroll (instead of the floating side pill)
+
 # 2.3.5 - 2026/07/12
 
 ### Added

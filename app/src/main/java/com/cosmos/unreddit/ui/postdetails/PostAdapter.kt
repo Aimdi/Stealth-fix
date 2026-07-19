@@ -70,8 +70,8 @@ class PostAdapter(
 
             binding.includePostInfo.run {
                 this.post = post
-                textPostAuthor.text = post.author
-                textSubreddit.text = post.subreddit
+                textPostAuthor.text = formatUsername(post.author)
+                textSubreddit.text = formatSubreddit(post.subreddit)
             }
 
             binding.textPostTitle.text = post.title
@@ -252,6 +252,23 @@ class PostAdapter(
                 visibility = View.VISIBLE
                 load(preview, !post.shouldShowPreview(contentPreferences), builder = requestBuilder)
             }
+        }
+    }
+
+    private fun formatSubreddit(subreddit: String): String {
+        return when {
+            subreddit.startsWith("r/", ignoreCase = true) ||
+                subreddit.startsWith("/r/", ignoreCase = true) -> subreddit.removePrefix("/")
+            else -> "r/$subreddit"
+        }
+    }
+
+    private fun formatUsername(author: String): String {
+        return when {
+            author.startsWith("u/", ignoreCase = true) ||
+                author.startsWith("/u/", ignoreCase = true) -> author.removePrefix("/")
+            author.startsWith("[") -> author
+            else -> "u/$author"
         }
     }
 }
