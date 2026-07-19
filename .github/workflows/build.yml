@@ -51,6 +51,10 @@ jobs:
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK artifact
+        # Best-effort convenience upload; a hit Actions artifact-storage quota
+        # must not block publishing the release (release assets are stored
+        # separately and don't count against that quota).
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: stealth-debug-apk
